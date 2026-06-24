@@ -1,8 +1,10 @@
-UAS Mikrokontroler 
+# UAS Mikrokontroler
 
-RP 23 CID B
+## Informasi Proyek
 
-Anggota
-Arrafi Hilmi
-Sulastian Setiadi
-Naufal Annafi Alistair
+**Mata Kuliah:** Mikrokontroler
+**Kelas:** RP 23 CID B
+
+## Anggota Kelompok
+
+* Arrafi Hilmi - 23552011388
