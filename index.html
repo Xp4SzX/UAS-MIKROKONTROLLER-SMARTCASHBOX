@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Tabungan IoT</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>
+            <i class="fas fa-piggy-bank"></i>
+            Smart Tabungan IoT
+        </h1>
+
+        <p>Monitoring Celengan Pintar Berbasis ESP32 dan MQTT</p>
+
+    </header>
+
+
+    <!-- CARD -->
+
+    <section class="cards">
+
+        <div class="card">
+
+            <h3>Total Saldo</h3>
+
+            <h1 id="saldo">
+
+                Rp 0
+
+            </h1>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Nominal Terakhir</h3>
+
+            <h2 id="nominal">
+
+                Rp 0
+
+            </h2>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Status</h3>
+
+            <h2 id="status">
+
+                Menunggu...
+
+            </h2>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Nilai UV</h3>
+
+            <h2 id="uv">
+
+                0
+
+            </h2>
+
+        </div>
+
+    </section>
+
+
+    <!-- MQTT STATUS -->
+
+    <section class="mqtt">
+
+        <h3>
+
+            MQTT :
+
+            <span id="mqttStatus">
+
+                🔴 Disconnect
+
+            </span>
+
+        </h3>
+
+    </section>
+
+
+    <!-- BUTTON -->
+
+    <section class="action">
+
+        <button id="btnTambah">
+
+            <i class="fas fa-plus-circle"></i>
+
+            Tambah Saldo
+
+        </button>
+
+        <button id="btnAmbil">
+
+            <i class="fas fa-money-bill-wave"></i>
+
+            Ambil Uang
+
+        </button>
+
+        <button id="btnReset">
+
+            <i class="fas fa-trash"></i>
+
+            Reset Riwayat
+
+        </button>
+
+    </section>
+
+
+    <!-- MODAL TAMBAH SALDO -->
+
+    <div class="modal" id="modalTambah">
+
+        <div class="modal-content">
+
+            <h2>Tambah Saldo</h2>
+
+            <input
+                type="number"
+                id="jumlahTambah"
+                placeholder="Masukkan nominal">
+
+            <div class="modal-button">
+
+                <button id="simpanTambah">
+
+                    Simpan
+
+                </button>
+
+                <button id="batalTambah">
+
+                    Batal
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MODAL AMBIL UANG -->
+
+    <div class="modal" id="modalAmbil">
+
+        <div class="modal-content">
+
+            <h2>Ambil Uang</h2>
+
+            <input
+                type="number"
+                id="jumlahAmbil"
+                placeholder="Masukkan nominal">
+
+            <div class="modal-button">
+
+                <button id="simpanAmbil">
+
+                    Simpan
+
+                </button>
+
+                <button id="batalAmbil">
+
+                    Batal
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TABEL -->
+
+    <section class="table-container">
+
+        <h2>
+
+            Riwayat Transaksi
+
+        </h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>No</th>
+
+                    <th>Nominal</th>
+
+                    <th>Jenis</th>
+
+                    <th>Status</th>
+
+                    <th>Sumber</th>
+
+                    <th>UV</th>
+
+                    <th>Saldo</th>
+
+                    <th>Waktu</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="historyTable">
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+
+    <!-- MQTT Library -->
+
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+
+    <!-- App -->
+
+    <script src="js/app.js"></script>
+
+    <!-- MQTT -->
+
+    <script src="js/mqtt.js"></script>
+
+</body>
+
+</html>
