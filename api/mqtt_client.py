@@ -7,12 +7,13 @@ import json
 import paho.mqtt.client as mqtt
 
 from models import TransactionModel
+from telegram_bot import kirim_notif_telegram  # 🟢 1. IMPORT FUNGSI TELEGRAM BOT
 
 # ==========================================
 # KONFIGURASI MQTT
 # ==========================================
 
-MQTT_BROKER = "192.168.100.29"      # Ganti jika broker berada di komputer lain
+MQTT_BROKER = "webesp32smartcashbox.cloud.shiftr.io"      
 MQTT_PORT = 1883
 MQTT_TOPIC = "smarttabungan/data"
 
@@ -21,18 +22,15 @@ MQTT_TOPIC = "smarttabungan/data"
 # ==========================================
 
 def on_connect(client, userdata, flags, rc):
-
     if rc == 0:
         print("===================================")
-        print(" MQTT Connected")
+        print(" MQTT Connected to Shiftr.io")
         print("===================================")
 
         client.subscribe(MQTT_TOPIC)
-
         print(f"Subscribe Topic : {MQTT_TOPIC}")
-
     else:
-        print("MQTT Connection Failed")
+        print(f"MQTT Connection Failed! Kode Error (rc): {rc}")
 
 
 # ==========================================
@@ -57,6 +55,7 @@ def on_message(client, userdata, msg):
         print("Saldo :", saldo)
         print("Status :", status)
 
+        # Menyimpan ke Database MySQL
         hasil = TransactionModel.insert_transaksi(
             nominal,
             uv,
@@ -65,8 +64,15 @@ def on_message(client, userdata, msg):
             "Masuk",
             "ESP32"
         )
-
         print("HASIL INSERT =", hasil)
+
+        # 🟢 2. KIRIM LAPORAN KE TELEGRAM SETELAH BERHASIL INSERT DATABASE
+        kirim_notif_telegram(
+            nominal=nominal,
+            saldo=saldo,
+            status=status,
+            sumber="Celengan ESP32"
+        )
 
     except Exception as e:
         import traceback
@@ -78,12 +84,12 @@ def on_message(client, userdata, msg):
 # ==========================================
 
 def start_mqtt():
-
     client = mqtt.Client()
-
     client.on_connect = on_connect
-
     client.on_message = on_message
+
+    # Kredensial Shiftr.io Cloud Anda
+    client.username_pw_set("webesp32smartcashbox", "FUQ8wyi7ZYrywNLF")
 
     client.connect(
         MQTT_BROKER,

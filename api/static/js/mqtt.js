@@ -4,7 +4,7 @@
 // ==========================================
 
 // Broker MQTT melalui WebSocket
-const MQTT_BROKER = "ws://localhost:9001";
+const MQTT_BROKER = 'wss://webesp32smartcashbox:FUQ8wyi7ZYrywNLF@webesp32smartcashbox.cloud.shiftr.io';
 
 // Topic yang digunakan ESP32
 const MQTT_TOPIC = "smarttabungan/data";
