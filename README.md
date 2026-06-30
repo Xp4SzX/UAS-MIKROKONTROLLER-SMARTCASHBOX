@@ -36,8 +36,7 @@ Proyek ini dibuat sebagai tugas **Ujian Akhir Semester Mata Kuliah Mikrokontrole
 * Resistor 1k, 100
 * Kabel jumper male to male, female to male
 * LED UV
-* LED RGB
-* Buzzer
+
 
 ## Software
 
